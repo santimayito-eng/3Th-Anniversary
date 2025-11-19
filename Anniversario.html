@@ -1,0 +1,161 @@
+<!--
+3Th-Anniversary-Webpage.html - actualizado
+- Se ha añadido efecto lightbox a las imágenes dentro de Sorpresa Importante, igual que la galería.
+-->
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3Th Anniversary</title>
+  <!-- Cambiamos las fuentes en el <head> -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+
+    :root{
+      --pink-dark:#d46a8f;
+      --pink-light:#ffd9e6;
+      --white:#ffffff;
+      --card-radius:16px;
+      --max-width:1100px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.08);
+      --gap:18px;
+      font-family: 'Dancing Script', cursive;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--white) 0%, var(--pink-light) 100%); color:#333; display:flex; justify-content:center; padding:32px 16px;}
+    .container{width:100%; max-width:var(--max-width); background:var(--white); border-radius:20px; padding:32px; box-shadow:var(--shadow)}
+
+    .hero{display:flex; flex-direction:column; align-items:center; text-align:center; gap:12px}
+    .title{font-size:clamp(32px,7vw,60px); color:var(--pink-dark); font-weight:700; letter-spacing:1px}
+    .subtitle{font-size:18px; color:#6b4460}
+    .buttons{display:flex; gap:12px; margin-top:6px; flex-wrap:wrap}
+
+    .btn{background:var(--pink-dark); color:var(--white); padding:12px 22px; border-radius:12px; border:none; cursor:pointer; font-weight:700; box-shadow:0 6px 18px rgba(212,106,143,0.2); transition:transform .18s ease, opacity .18s ease}
+    .btn.secondary{background:transparent; color:var(--pink-dark); border:2px solid var(--pink-dark)}
+    .btn:active{transform:translateY(2px)}
+
+    .section{margin-top:26px}
+    .hidden{display:none}
+    .anim-fade{animation:fadeIn .48s ease forwards; opacity:0}
+    .anim-slide-up{animation:slideUp .52s cubic-bezier(.2,.9,.3,1) forwards; opacity:0}
+    @keyframes fadeIn{to{opacity:1}} 
+    @keyframes slideUp{to{opacity:1; transform:none}} 
+
+    .gallery{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--gap); margin-top:12px}
+    .photo{background:linear-gradient(180deg,var(--pink-light),#fff); border-radius:12px; overflow:hidden; display:flex; align-items:center; justify-content:center; min-height:200px; box-shadow:var(--shadow); transition:transform .3s ease}
+    .photo img{width:100%; height:100%; object-fit:cover; display:block; cursor:pointer}
+    .photo.placeholder{display:flex; align-items:center; justify-content:center; color:var(--pink-dark); font-weight:700}
+    .photo:hover{transform:scale(1.05)}
+
+    .important-grid{display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); margin-top:12px}
+    .important-card{background:linear-gradient(180deg,var(--white),var(--pink-light)); border-radius:18px; padding:18px; box-shadow:var(--shadow); min-height:220px; display:flex; flex-direction:column; gap:12px; overflow:hidden}
+    .important-card h3{margin:0;color:var(--pink-dark)}
+    .doc-placeholder{flex:1; border:2px dashed rgba(212,106,143,0.35); border-radius:12px; display:flex; align-items:center; justify-content:center; padding:12px; text-align:center; overflow:hidden; transition:transform .3s ease}
+    .doc-placeholder img{width:100%; height:100%; object-fit:cover; border-radius:12px; transition:transform .3s ease; cursor:pointer}
+    .doc-placeholder:hover img{transform:scale(1.05)}
+    .doc-placeholder:hover{transform:scale(1.03)}
+
+    @media (max-width:700px){
+      .container{padding:18px}
+      .buttons{justify-content:center}
+      .important-card{min-height:180px}
+      .gallery{grid-template-columns:repeat(2,1fr); min-height:160px}
+    }
+
+    .note{margin-top:18px; font-size:13px; color:#6b4460; text-align:center}
+    .center{display:flex; align-items:center; justify-content:center}
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div class="title">3Th Anniversary</div>
+      <div class="subtitle">Tres años de recuerdos, risas y amor.A pesar de los problemas y dificultades que hemos tenido gracias a Dios aun seguimos aqui. Gracias por cada momento juntos gracias por cada felicidad tuya gracias por tu compañia y por aun seguir agarrada de mi mano. Muchas gracias por todo. Y hoy un dia tan hermoso y tan especial cuando te dije Quieres ser mi novia en el restaurante hace 3 años todo lo magico comenzo todo lo lindo comenzo contigo.Altos y bajos, derrotas y victorias tristezas y llantos tiempos de espera tiempos de seguir, tiempos de guerra y tiempos de victoria y aun seguimos aqui. Todo en el nombre de Dios salga bien y seas tu caminando el resto de mi vida agarraditos de la manito y Dios primeramente cuidandos. Mi morenita mi bebe mi reina mi corazoncito mi tesoro mas hermoso mi reina linda eres lo mas hermoso de mi vida. Espero verte muy pronto y cumplir anhelar muchas metas sueños y anhelos juntos. Gracias por cada momento a tu lado. Te amo desde lo mas profundo de mi corazon.</div>
+      <div class="buttons">
+        <button class="btn" id="openGalleryBtn">SORPRESA</button>
+        <button class="btn secondary" id="openImportantBtn">SORPRESA IMPORTANTE</button>
+      </div>
+    </header>
+
+    <section id="gallerySection" class="section hidden anim-fade">
+      <h2 style="color:var(--pink-dark); margin:0 0 8px 0">Galería</h2>
+      <p style="margin:0 0 12px 0; color:#6b4460;">Cada recuerdo bonito al inicio de nuestra historia todo lo bonito que me ha pasado y lo mas hermoso que me ha pasado eres y seras tu <3 </p>
+      <div class="gallery" id="galleryGrid">
+        <div class="photo"><img src="images/photo1.jpg" alt="Foto 1"></div>
+        <div class="photo"><img src="images/photo2.jpg" alt="Foto 2"></div>
+        <div class="photo"><img src="images/photo3.jpg" alt="Foto 3"></div>
+        <div class="photo"><img src="images/photo4.jpg" alt="Foto 4"></div>
+        <div class="photo"><img src="images/photo5.jpg" alt="Foto 5"></div>
+        <div class="photo"><img src="images/photo6.jpg" alt="Foto 6"></div>
+      </div>
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn secondary" onclick="closeSection('gallerySection')">Cerrar</button>
+      </div>
+    </section>
+
+    <section id="importantSection" class="section hidden anim-slide-up">
+      <h2 style="color:var(--pink-dark); margin:0 0 8px 0">Sorpresa Importante</h2>
+      <p style="margin:0 0 12px 0; color:#6b4460;">Aqui esta nuestra proxima y hermosa aventura juntos.<p>Aqui esta un regalo que tu te mereces con mucho amor para ti, para mi tesoro hermosa para mi reina hermosa para la mujer que mas amo en mi vida. Este regalo que hoy te entrego no es solo un detalle: es un símbolo de todo lo que siento por ti y de cuánto te valoro. Te mereces cada alegría, cada sorpresa y cada momento especial, porque eres increíble, dulce, generosa y el motor de mi felicidad. Espero que este regalo te haga sonreír tanto como tú me haces sonreír a mí cada día. Gracias por ser tú, por cada instante compartido y por los muchos que aún nos esperan. Feliz aniversario, mi vida; te mereces esto y muchísimo más. Y vuelvo y te digo. Te mereces cada alegría, cada sorpresa y cada momento especial porque eres alguien única, generosa, dulce, paciente y maravillosa. Te mereces todo lo bueno que el mundo pueda ofrecer y mucho más, porque llenas mi vida de luz y haces que incluso los días ordinarios se sientan extraordinarios.
+Cada esfuerzo que haces, cada sonrisa que das, cada gesto de cariño que me regalas, me recuerda que mereces recibir lo mejor, y este regalo es apenas un pequeño reflejo de lo que quiero darte todos los días amor, felicidad, seguridad y alegría.
+Espero que, al recibirlo, sientas todo lo que significas para mí y lo importante que eres en mi vida. Este regalo es solo una manera de decirte que te celebro, te admiro y sobre todo, te amo profundamente. Feliz aniversario, mi vida. Te mereces esto, te mereces el mundo y mucho más de lo que pueda expresar con palabras. </p></p>
+      <div class="important-grid">
+        <div class="important-card">
+          <h3>✈️ Tickets Aéreos</h3>
+          <div class="doc-placeholder" id="flightBox">
+            <img src="images/flight.png" alt="Tickets Aéreos">
+          </div>
+        </div>
+        <div class="important-card">
+          <h3>🩺 Seguros Médicos</h3>
+          <div class="doc-placeholder" id="insuranceBox">
+            <img src="images/insurance.png" alt="Seguros Médicos">
+          </div>
+        </div>
+        <div class="important-card">
+          <h3>🏨 Reserva del Hotel</h3>
+          <div class="doc-placeholder" id="hotelBox">
+            <img src="images/hotel.png" alt="Reserva del Hotel">
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap">
+        <button class="btn" onclick="closeSection('importantSection')">Cerrar</button>
+      </div>
+    </section>
+
+
+  </div>
+
+  <script>
+    const openGalleryBtn = document.getElementById('openGalleryBtn');
+    const openImportantBtn = document.getElementById('openImportantBtn');
+    const gallerySection = document.getElementById('gallerySection');
+    const importantSection = document.getElementById('importantSection');
+    function openSection(section){[gallerySection, importantSection].forEach(s=>{ if(s!==section) s.classList.add('hidden'); }); section.classList.remove('hidden'); void section.offsetWidth; if(section.classList.contains('anim-fade')){section.classList.remove('anim-fade'); void section.offsetWidth; section.classList.add('anim-fade');} else if(section.classList.contains('anim-slide-up')){section.classList.remove('anim-slide-up'); void section.offsetWidth; section.classList.add('anim-slide-up');} section.scrollIntoView({behavior:'smooth', block:'center'});}
+    function closeSection(id){ document.getElementById(id).classList.add('hidden'); }
+    openGalleryBtn.addEventListener('click', ()=>openSection(gallerySection));
+    openImportantBtn.addEventListener('click', ()=>openSection(importantSection));
+
+    function openLightbox(src){
+      const overlay = document.createElement('div');
+      overlay.style.position='fixed'; overlay.style.inset=0; overlay.style.background='rgba(0,0,0,0.6)'; overlay.style.display='flex'; overlay.style.alignItems='center'; overlay.style.justifyContent='center'; overlay.style.zIndex=9999;
+      overlay.innerHTML = `<div style=\"max-width:90%; max-height:90%; border-radius:12px; overflow:hidden; background:#fff;\"><img src='${src}' style='width:100%; height:100%; object-fit:contain; display:block;'/></div>`;
+      overlay.addEventListener('click', ()=>overlay.remove());
+      document.body.appendChild(overlay);
+    }
+
+    // Lightbox para todas las imágenes
+    document.querySelectorAll('img').forEach(img=>{
+      img.addEventListener('click', ()=>openLightbox(img.src));
+    });
+
+    function downloadSample(){const text='Sustituye las imágenes en la carpeta images/ y los textos en el HTML. Ejemplo: images/photo1.jpg, images/flight.jpg, images/insurance.jpg, images/hotel.jpg'; const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([text],{type:'text/plain'})); a.download='LEEME.txt'; a.click();}
+  </script>
+</body>
+</html>
+
+
